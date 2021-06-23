@@ -7,6 +7,7 @@
 #include <type_traits>
 #include <utility>
 
+namespace core::strings {
 
 // Recursive comparison of each individual character in a string
 // The last bit with std::enable_if uses SFINAE (Substitution Failure Is Not An Error)
@@ -271,3 +272,5 @@ constexpr auto StringFactory(const char* value)
 {
 	return StringFactory<N>(value, typename std::make_index_sequence<N>{});
 }
+
+} // namespace core::strings

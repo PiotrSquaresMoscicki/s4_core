@@ -1,11 +1,11 @@
 #pragma once
 
 #include <cstdint>
-#include <core/StringConstant.hpp>
+#include <core/strings/string_constant.hpp>
 
 // from https://github.com/Manu343726/ctti
 
-namespace core
+namespace core::strings
 {
 	//------------------------------------------------------------------------------------------------------------------------------------------
 	using hash_t = uint64_t;

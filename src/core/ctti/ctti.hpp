@@ -9,15 +9,15 @@ namespace core::ctti {
 
 //------------------------------------------------------------------------------------------------
 template <typename T>
-constexpr auto get_type() { return T::template getTypeInfo<T>(); }
+constexpr auto get_type_info() { return T::template get_type_info<T>(); }
 
 } // namespace core::ctti
 
 //------------------------------------------------------------------------------------------------
 #define CTTI_DECLARE_CLASS(CLASS)\
-	friend constexpr auto ::core::ctti::get_type<::CLASS>();\
+	friend constexpr auto ::core::ctti::get_type_info<::CLASS>();\
 	template <typename CttiDeclarationTypename>\
-	static constexpr auto getTypeInfo()\
+	static constexpr auto get_type_info()\
 	{\
 		return ::core::ctti::TypeFactory<CttiDeclarationTypename>::get\
 		(\
@@ -32,7 +32,7 @@ constexpr auto get_type() { return T::template getTypeInfo<T>(); }
 //------------------------------------------------------------------------------------------------
 #define CTTI_DECLARE_FUNDAMENTAL(TYPE)\
 	template <>\
-	constexpr auto ::core::ctti::getTypeInfo<TYPE>()\
+	constexpr auto ::core::ctti::get_type_info<TYPE>()\
 	{\
 		return ::core::ctti::TypeFactory<TYPE>::create(::core::attr::Name(#TYPE));\
 	}

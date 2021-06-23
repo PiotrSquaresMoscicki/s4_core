@@ -38,21 +38,26 @@ class Tuple {};
 template <typename First, typename... Rest>
 class Tuple<First, Rest...> {
 public:
-	constexpr Tuple(First first, Rest... rest) : m_first(std::forward<First>(first)), m_rest(std::forward<Rest>(rest)...) {}
+	constexpr Tuple(First first, Rest... rest) 
+		: m_first(std::forward<First>(first)), m_rest(std::forward<Rest>(rest)...) {}
 
-	// size
-	constexpr size_t size() const { return 1 + sizeof...(Rest); }
+	// length
+	constexpr size_t length() const { return 1 + sizeof...(Rest); }
 
 	// has given type
 	template<typename T>
-	constexpr bool has() const { return std::disjunction_v<std::is_same<T, First>, std::is_same<T, Rest>...>; }
+	constexpr bool has() const { 
+		return std::disjunction_v<std::is_same<T, First>, std::is_same<T, Rest>...>; 
+	
+	}
 	template<template <typename...> typename T>
-	constexpr bool has() const { return std::disjunction_v<IsInstanceOf<T, First>, IsInstanceOf<T, Rest>...>; }
+	constexpr bool has() const { 
+		return std::disjunction_v<IsInstanceOf<T, First>, IsInstanceOf<T, Rest>...>; 
+	}
 
 	// get by index
 	template<size_t idx>
-	constexpr auto& at()
-	{
+	constexpr auto& at() {
 		if constexpr (idx == 0)
 			return m_first;
 		else
@@ -60,8 +65,7 @@ public:
 	}
 
 	template<size_t idx>
-	constexpr const auto& at() const
-	{
+	constexpr const auto& at() const {
 		if constexpr (idx == 0)
 			return m_first;
 		else
@@ -70,8 +74,7 @@ public:
 
 	// get by type
 	template <typename T>
-	constexpr T& get()
-	{
+	constexpr T& get() {
 		if constexpr (std::is_same<T, First>::value)
 			return m_first;
 		else
@@ -79,9 +82,7 @@ public:
 	}
 
 	template <typename T>
-	constexpr const T& get() const
-
-	{
+	constexpr const T& get() const {
 		if constexpr (std::is_same<T, First>::value)
 			return m_first;
 		else
@@ -89,8 +90,7 @@ public:
 	}
 
 	template<template <typename...> typename T>
-	constexpr auto& get()
-	{
+	constexpr auto& get() {
 		if constexpr (IsInstanceOf<T, First>::value)
 			return m_first;
 		else
@@ -98,8 +98,7 @@ public:
 	}
 
 	template<template <typename...> typename T>
-	constexpr const auto& get() const
-	{
+	constexpr const auto& get() const {
 		if constexpr (IsInstanceOf<T, First>::value)
 			return m_first;
 		else
@@ -121,8 +120,8 @@ class Tuple<First>
 public:
 	constexpr Tuple(First first) : m_first(std::forward<First>(first)) {}
 
-	// size
-	constexpr size_t size() const { return 1; }
+	// length
+	constexpr size_t length() const { return 1; }
 
 	// has given type
 	template<typename T>

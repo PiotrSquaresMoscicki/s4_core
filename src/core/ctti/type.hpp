@@ -1,7 +1,8 @@
 #pragma once
 
-#include <core/collections/tuple.h>
-
+#include <core/collections/tuple.hpp>
+#include <core/attr/class.hpp>
+#include <core/attr/name.hpp>
 namespace core::ctti {
 
 //------------------------------------------------------------------------------------------------
@@ -12,6 +13,13 @@ class Type : public collections::Tuple<Attrs...> {
 public:
 	constexpr Type(Attrs... attrs) 
 		: collections::Tuple<Attrs...>(std::forward<Attrs>(attrs)...) {}
+
+	constexpr const strings::ConstexprString& get_name() const { 
+		return this->template get<attr::Name>(); 
+	}
+	
+	constexpr bool is_class() const { return this->template has<attr::Class>(); }
+
 }; // class Type
 
 //------------------------------------------------------------------------------------------------
