@@ -8,13 +8,19 @@ namespace core::ctti {
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
-template <typename... Attrs>
-class Fields : public collections::Tuple<Attrs...> {
+template <typename T, typename s, typename... Attrs>
+class Property : public collections::Tuple<Attrs...> {
 public:
-    constexpr Fields(Attrs... attrs) 
-        : Tuple<Attrs...>(std::forward<Attrs>(attrs)...) {}
+    constexpr Property(Attrs... attrs) 
+        : collections::Tuple<Attrs...>(std::forward<Attrs>(attrs)...) {}
 
-}; // class Fields
+	constexpr const strings::ConstexprString& get_name() const { 
+		return this->template get_one<attr::Name>(); 
+	}
+
+	constexpr const T& get(const S& structure) const 
+
+}; // class Property
 
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------

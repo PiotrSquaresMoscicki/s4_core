@@ -121,6 +121,11 @@ public:
 		return this->template get_all_internal_1<T>(this->m_rest.template get_all<T>());
 	}
 
+	template<template <typename...> typename T>
+	constexpr auto get_all() const {
+		return this->template get_all_internal_1<T>(this->m_rest.template get_all<T>());
+	}
+
 	// @todo: implement rest of get_one methods
 
 private:
@@ -148,6 +153,26 @@ private:
 	constexpr auto get_all_internal_2(std::index_sequence<Indexes...> dummy, T first, 
 		Tuple<Args...> rest) const {
 		return ::core::collections::Tuple(first, rest.template at<Indexes>()...);
+	}
+
+	template <template <typename...> typename T, typename... Args>
+	constexpr auto get_all_internal_1(Tuple<Args...> from_rest) const {
+		constexpr auto from_rest_len = from_rest.length();
+
+		if constexpr (from_rest_len > 0) {
+			if constexpr (IsInstanceOf<T, First>::value) {
+				return get_all_internal_2(std::make_index_sequence<from_rest_len>{}, m_first, 
+					from_rest);
+			}
+			else 
+				return from_rest;
+		}
+		else{
+			if constexpr (IsInstanceOf<T, First>::value)
+				return ::core::collections::Tuple(m_first);
+			else 
+				return ::core::collections::Tuple();
+		}
 	}
 
 	First m_first;
