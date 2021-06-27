@@ -34,10 +34,12 @@ int main() {
     cout << "entity_ti_is_class = " << entity_ti_is_class << endl;
     cout << "entity_ti_is_fundamental = " << entity_ti_is_fundamental << endl;
 
-    constexpr auto all = Tuple(12, 23/*, 34.34, 23, "sdfsdf", 3333*/);
+    constexpr auto all = Tuple(12, 23, 34.34, 53, "sdfsdf", 3333);
     constexpr auto ints = all.get_all<int>();
     
     cout << "ints.length() = " << ints.length() << endl;
     cout << "ints.at<0>() = " << ints.at<0>() << endl;
     cout << "ints.at<1>() = " << ints.at<1>() << endl;
+    cout << "ints.at<2>() = " << ints.at<2>() << endl;
+    cout << "ints.at<3>() = " << ints.at<3>() << endl;
 }

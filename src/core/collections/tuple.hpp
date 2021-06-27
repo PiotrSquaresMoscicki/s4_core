@@ -129,17 +129,25 @@ private:
 		constexpr auto from_rest_len = from_rest.length();
 
 		if constexpr (from_rest_len > 0) {
-			return get_all_internal_2(std::make_index_sequence<from_rest_len>{}, m_first, 
-				from_rest);
+			if constexpr (std::is_same<T, First>::value) {
+				return get_all_internal_2(std::make_index_sequence<from_rest_len>{}, m_first, 
+					from_rest);
+			}
+			else 
+				return from_rest;
 		}
-		else
-			return Tuple(m_first);
+		else{
+			if constexpr (std::is_same<T, First>::value)
+				return ::core::collections::Tuple(m_first);
+			else 
+				return ::core::collections::Tuple();
+		}
 	}
 
 	template <size_t... Indexes, typename T, typename... Args>
 	constexpr auto get_all_internal_2(std::index_sequence<Indexes...> dummy, T first, 
 		Tuple<Args...> rest) const {
-		return Tuple(first, rest.template at<Indexes>()...);
+		return ::core::collections::Tuple(first, rest.template at<Indexes>()...);
 	}
 
 	First m_first;
@@ -183,9 +191,9 @@ public:
 	template <typename T>
 	constexpr auto get_all() const {
 		if constexpr (std::is_same<T, First>::value)
-			return Tuple(m_first);
+			return ::core::collections::Tuple(m_first);
 		else 
-			return Tuple();
+			return ::core::collections::Tuple();
 	}
 
 private:
