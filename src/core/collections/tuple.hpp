@@ -32,7 +32,17 @@ inline constexpr auto IsUnique<T, Rest...> = std::bool_constant<(!std::is_same_v
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 template<typename... Args>
-class Tuple {};
+class Tuple {
+public:
+	// length
+	constexpr size_t length() const { return 0; }
+
+	// has given type
+	template<typename T>
+	constexpr bool has() const { return false; }
+	template<template <typename...> typename T>
+	constexpr bool has() const { return false; }
+};
 
 //------------------------------------------------------------------------------------------------
 template <typename First, typename... Rest>
@@ -55,7 +65,7 @@ public:
 		return std::disjunction_v<IsInstanceOf<T, First>, IsInstanceOf<T, Rest>...>; 
 	}
 
-	// get by index
+	// get_one by index
 	template<size_t idx>
 	constexpr auto& at() {
 		if constexpr (idx == 0)
@@ -72,42 +82,66 @@ public:
 			return m_rest.template at<idx - 1>();
 	}
 
-	// get by type
+	// get_one by type
 	template <typename T>
-	constexpr T& get() {
+	constexpr T& get_one() {
 		if constexpr (std::is_same<T, First>::value)
 			return m_first;
 		else
-			return m_rest.template get<T>();
+			return m_rest.template get_one<T>();
 	}
 
 	template <typename T>
-	constexpr const T& get() const {
+	constexpr const T& get_one() const {
 		if constexpr (std::is_same<T, First>::value)
 			return m_first;
 		else
-			return m_rest.template get<T>();
+			return m_rest.template get_one<T>();
 	}
 
 	template<template <typename...> typename T>
-	constexpr auto& get() {
+	constexpr auto& get_one() {
 		if constexpr (IsInstanceOf<T, First>::value)
 			return m_first;
 		else
-			return m_rest.template get<T>();
+			return m_rest.template get_one<T>();
 	}
 
 	template<template <typename...> typename T>
-	constexpr const auto& get() const {
+	constexpr const auto& get_one() const {
 		if constexpr (IsInstanceOf<T, First>::value)
 			return m_first;
 		else
-			return m_rest.template get<T>();
+			return m_rest.template get_one<T>();
 	}
 
-	// @todo: implement rest of get methods
+	// get_all by type
+	template <typename T>
+	constexpr auto get_all() const {
+		return this->template get_all_internal_1<T>(this->m_rest.template get_all<T>());
+	}
+
+	// @todo: implement rest of get_one methods
 
 private:
+	template <typename T, typename... Args>
+	constexpr auto get_all_internal_1(Tuple<Args...> from_rest) const {
+		constexpr auto from_rest_len = from_rest.length();
+
+		if constexpr (from_rest_len > 0) {
+			return get_all_internal_2(std::make_index_sequence<from_rest_len>{}, m_first, 
+				from_rest);
+		}
+		else
+			return Tuple(m_first);
+	}
+
+	template <size_t... Indexes, typename T, typename... Args>
+	constexpr auto get_all_internal_2(std::index_sequence<Indexes...> dummy, T first, 
+		Tuple<Args...> rest) const {
+		return Tuple(first, rest.template at<Indexes>()...);
+	}
+
 	First m_first;
 	Tuple<Rest...> m_rest;
 
@@ -135,15 +169,24 @@ public:
 	template<size_t idx>
 	constexpr const First& at() const { assert(idx == 0); return m_first; }
 
-	// get by type
+	// get_one by type
 	template <typename T>
-	constexpr T& get() { static_assert(std::is_same<T, First>::value); return m_first; }
+	constexpr T& get_one() { static_assert(std::is_same<T, First>::value); return m_first; }
 	template <typename T>
-	constexpr const T& get() const { static_assert(std::is_same<T, First>::value); return m_first; }
+	constexpr const T& get_one() const { static_assert(std::is_same<T, First>::value); return m_first; }
 	template<template <typename...> typename T>
-	constexpr auto& get() { static_assert(IsInstanceOf<T, First>::value); return m_first; }
+	constexpr auto& get_one() { static_assert(IsInstanceOf<T, First>::value); return m_first; }
 	template<template <typename...> typename T>
-	constexpr const auto& get() const { static_assert(IsInstanceOf<T, First>::value); return m_first; }
+	constexpr const auto& get_one() const { static_assert(IsInstanceOf<T, First>::value); return m_first; }
+
+	// get_all by type
+	template <typename T>
+	constexpr auto get_all() const {
+		if constexpr (std::is_same<T, First>::value)
+			return Tuple(m_first);
+		else 
+			return Tuple();
+	}
 
 private:
 	First m_first;

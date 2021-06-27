@@ -1,8 +1,11 @@
 #pragma once
 
 #include <core/collections/tuple.hpp>
-#include <core/attr/class.hpp>
 #include <core/attr/name.hpp>
+#include <core/attr/sizeof.hpp>
+#include <core/attr/struct.hpp>
+#include <core/attr/fundamental.hpp>
+
 namespace core::ctti {
 
 //------------------------------------------------------------------------------------------------
@@ -15,10 +18,13 @@ public:
 		: collections::Tuple<Attrs...>(std::forward<Attrs>(attrs)...) {}
 
 	constexpr const strings::ConstexprString& get_name() const { 
-		return this->template get<attr::Name>(); 
+		return this->template get_one<attr::Name>(); 
 	}
+
+	constexpr size_t get_sizeof() const { return this->template get_one<attr::Sizeof>().m_size; }
 	
-	constexpr bool is_class() const { return this->template has<attr::Class>(); }
+	constexpr bool is_struct() const { return this->template has<attr::Struct>(); }
+	constexpr bool is_fundamental() const { return this->template has<attr::Fundamental>(); }
 
 }; // class Type
 
