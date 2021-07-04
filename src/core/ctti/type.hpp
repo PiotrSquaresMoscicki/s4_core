@@ -5,6 +5,7 @@
 #include <core/attr/sizeof.hpp>
 #include <core/attr/struct.hpp>
 #include <core/attr/fundamental.hpp>
+#include <core/attr/property.hpp>
 
 namespace core::ctti {
 
@@ -26,6 +27,10 @@ public:
 	constexpr bool is_struct() const { return this->template has<attr::Struct>(); }
 	constexpr bool is_fundamental() const { return this->template has<attr::Fundamental>(); }
 
+
+	template<typename = std::enable_if_t<std::is_void<void>::value>>
+	constexpr auto get_properties() const { return this->template get_all<attr::Property>();}
+
 }; // class Type
 
 //------------------------------------------------------------------------------------------------
@@ -39,6 +44,7 @@ public:
 	static constexpr Type<T, Attrs...> get(Attrs... attrs) {
 		return Type<T, Attrs...>(std::forward<Attrs>(attrs)...);
 	}
+	
 }; // class TypeFactory
 
 } // namespace core::ctti

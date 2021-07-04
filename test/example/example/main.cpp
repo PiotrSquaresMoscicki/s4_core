@@ -10,7 +10,13 @@ using namespace core::ctti;
 namespace Game {
 class Entity {
     DECLARE_STRUCT(Game::Entity)
+        DECLARE_PROPERTY(m_int)
+        DECLARE_PROPERTY(m_float)
     END_STRUCT
+
+public:
+    int m_int = 0;
+    float m_float = 0;
 
 }; // class Entity
 
@@ -27,19 +33,20 @@ int main() {
     constexpr auto entity_ti_sizeof = entity_ti.get_sizeof();
     constexpr auto entity_ti_is_class = entity_ti.is_struct();
     constexpr auto entity_ti_is_fundamental = entity_ti.is_fundamental();
+
+    constexpr auto entity_ti_properties = entity_ti.get_properties();
+    constexpr auto entity_ti_properties_len = entity_ti_properties.length();
+    constexpr auto first_property = entity_ti_properties.at<0>();
+    constexpr auto first_property_name = first_property.get_name();
     
+
     cout << "entity_ti_len = " << entity_ti_len << endl;
     cout << "entity_ti_name = " << entity_ti_name.get() << endl;
     cout << "entity_ti_sizeof = " << entity_ti_sizeof << endl;
     cout << "entity_ti_is_class = " << entity_ti_is_class << endl;
     cout << "entity_ti_is_fundamental = " << entity_ti_is_fundamental << endl;
+    cout << "entity_ti_properties_len = " << entity_ti_properties_len << endl;
+    cout << "first_property_name = " << first_property_name.get() << endl;
 
-    constexpr auto all = Tuple(12, 23, 34.34, 53, "sdfsdf", 3333);
-    constexpr auto ints = all.get_all<int>();
-    
-    cout << "ints.length() = " << ints.length() << endl;
-    cout << "ints.at<0>() = " << ints.at<0>() << endl;
-    cout << "ints.at<1>() = " << ints.at<1>() << endl;
-    cout << "ints.at<2>() = " << ints.at<2>() << endl;
-    cout << "ints.at<3>() = " << ints.at<3>() << endl;
+
 }

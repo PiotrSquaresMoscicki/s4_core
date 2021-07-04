@@ -220,6 +220,14 @@ public:
 		else 
 			return ::core::collections::Tuple();
 	}
+	
+	template<template <typename...> typename T>
+	constexpr auto get_all() const {
+		if constexpr (IsInstanceOf<T, First>::value)
+			return ::core::collections::Tuple(m_first);
+		else 
+			return ::core::collections::Tuple();
+	}
 
 private:
 	First m_first;

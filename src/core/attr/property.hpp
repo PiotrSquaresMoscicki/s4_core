@@ -3,12 +3,12 @@
 #include <core/collections/tuple.hpp>
 #include <core/attr/name.hpp>
 
-namespace core::ctti {
+namespace core::attr {
 
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
-template <typename T, typename s, typename... Attrs>
+template <typename T, typename S, typename... Attrs>
 class Property : public collections::Tuple<Attrs...> {
 public:
     constexpr Property(Attrs... attrs) 
@@ -18,34 +18,54 @@ public:
 		return this->template get_one<attr::Name>(); 
 	}
 
-	constexpr const T& get(const S& structure) const 
+	constexpr T& get(S& structure) const {}
+	constexpr const T& get(const S& structure) const {}
+
+
 
 }; // class Property
 
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
-template <typename T, typename C>
+template <typename T, typename S>
+class PropertyFactory
+{
+public:
+	template <typename... Attrs>
+	static constexpr Property<T, S, Attrs...> get(Attrs... attrs) {
+		return Property<T, S, Attrs...>(std::forward<Attrs>(attrs)...);
+	}
+
+}; // class PropertyFactory
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+template <typename T, typename S>
 class FieldPointer {
 public:
-    constexpr FieldPointer(T C::* p) : m_ptr(p) {}
+    constexpr FieldPointer(T S::* p) : m_ptr(p) {}
 
-    constexpr T& get(C& c) const { return c.*m_ptr; }
-    constexpr const T& get(const C& c) const { return c.*m_ptr; }
+    constexpr T& get(S& s) const { return s.*m_ptr; }
+    constexpr const T& get(const S& s) const { return s.*m_ptr; }
+
+    void set(S& s, T val) const { s.*m_ptr = std::move(val); }
+    void set(S& s, const T& val) const { s.*m_ptr = val; }
 
 private:
-    T C::* m_ptr = nullptr;
+    T S::* const m_ptr = nullptr;
 
 }; // class FieldPointer
 
 } // namespace core::ctti
 
 //------------------------------------------------------------------------------------------------
-#define DECLARE_FIELD(FIELD, ...)\
-	::ctti::AttrArrayFactory<CttiDeclarationTypename>::get\
+#define DECLARE_PROPERTY(FIELD)\
+	::core::attr::PropertyFactory<\
+		decltype(CttiDeclarationTypename::FIELD), CttiDeclarationTypename>::get\
 	(\
-		::attr::Name("d"), \
-		attr::FieldPointer(&CttiDeclarationTypename::FIELD),\
-		__VA_ARGS__\
-	)
+		::core::attr::Name(#FIELD), \
+		::core::attr::FieldPointer(&CttiDeclarationTypename::FIELD)\
+	),
 

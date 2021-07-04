@@ -5,7 +5,7 @@
 #include <core/attr/sizeof.hpp>
 #include <core/attr/struct.hpp>
 #include <core/attr/fundamental.hpp>
-//#include <core/attr/fields.hpp>
+#include <core/attr/property.hpp>
 
 namespace core::ctti {
 
