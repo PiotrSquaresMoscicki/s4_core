@@ -6,11 +6,12 @@ using namespace std;
 
 using namespace core::collections;
 using namespace core::ctti;
+using namespace core;
 
 namespace Game {
 class Entity {
     DECLARE_STRUCT(Game::Entity)
-        DECLARE_PROPERTY(m_int)
+        DECLARE_PROPERTY(m_int, attr::Name("dupeaaaa"), attr::Name("asdasd"), attr::Name("adssssss"))
         DECLARE_PROPERTY(m_float)
     END_STRUCT
 
@@ -38,6 +39,7 @@ int main() {
     constexpr auto entity_ti_properties_len = entity_ti_properties.length();
     constexpr auto first_property = entity_ti_properties.at<0>();
     constexpr auto first_property_name = first_property.get_name();
+    constexpr auto first_property_names_len = first_property.get_all<attr::Name>().length();
     
 
     cout << "entity_ti_len = " << entity_ti_len << endl;
@@ -47,6 +49,7 @@ int main() {
     cout << "entity_ti_is_fundamental = " << entity_ti_is_fundamental << endl;
     cout << "entity_ti_properties_len = " << entity_ti_properties_len << endl;
     cout << "first_property_name = " << first_property_name.get() << endl;
+    cout << "first_property_names_len = " << first_property_names_len << endl;
 
 
 }

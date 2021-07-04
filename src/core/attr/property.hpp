@@ -61,11 +61,12 @@ private:
 } // namespace core::ctti
 
 //------------------------------------------------------------------------------------------------
-#define DECLARE_PROPERTY(FIELD)\
+#define DECLARE_PROPERTY(FIELD, ...)\
 	::core::attr::PropertyFactory<\
 		decltype(CttiDeclarationTypename::FIELD), CttiDeclarationTypename>::get\
 	(\
 		::core::attr::Name(#FIELD), \
 		::core::attr::FieldPointer(&CttiDeclarationTypename::FIELD)\
+		__VA_OPT__(,) __VA_ARGS__\
 	),
 
