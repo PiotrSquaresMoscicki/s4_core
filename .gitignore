@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# Vim
+*.swp
+
 # Cmake and build directories
 build
 dist
