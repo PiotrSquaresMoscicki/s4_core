@@ -1,0 +1,11 @@
+[ ] Move tuple implementation used in ctti from core to ctti
+    [ ] Rename Length function to something more meaningfull like get_attributes
+[ ] Add rtti prototype
+    [ ] Add Struct
+    [ ] Add Enum
+    [ ] Add Type
+    [ ] Add Property
+[ ] Check if we can have two types with the same attributes
+[ ] Always obtain the same constexpr object from get_type_info
+[ ] Compare types, properties and methods using NameString
+[ ] Implement rtti::Fundamental
