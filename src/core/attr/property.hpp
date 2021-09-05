@@ -1,6 +1,6 @@
 #pragma once
 
-#include <core/collections/tuple.hpp>
+#include <core/ctti/tuple.hpp>
 #include <core/attr/name.hpp>
 
 namespace core::attr {
