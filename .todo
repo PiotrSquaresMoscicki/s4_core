@@ -1,5 +1,7 @@
-[ ] Move tuple implementation used in ctti from core to ctti
+[~] Move tuple implementation used in ctti from core to ctti
     [ ] Rename Length function to something more meaningfull like get_attributes
+[~] Move AttributeBase to ctti
+[ ] Add NameString
 [ ] Add rtti prototype
     [ ] Add Struct
     [ ] Add Enum
@@ -9,3 +11,7 @@
 [ ] Always obtain the same constexpr object from get_type_info
 [ ] Compare types, properties and methods using NameString
 [ ] Implement rtti::Fundamental
+[ ] Implement script for generating asm
+[ ] Rename ctti::Tuple to AttrArray
+[ ] Rename AttributeBade to AttrBase
+[ ] Assert all types added to AttrArray derive from AttrBase
