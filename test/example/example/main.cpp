@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <core/ctti/ctti.hpp>
+//#include <core/rtti/type.hpp>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ public:
 
 using namespace Game;
 
-int main() {
+void constexpr_test() {
     std::cout << "Hello World!" << std::endl;
 
     constexpr auto entity_ti = get_type_info<Entity>();
@@ -50,6 +51,17 @@ int main() {
     cout << "entity_ti_properties_len = " << entity_ti_properties_len << endl;
     cout << "first_property_name = " << first_property_name.get() << endl;
     cout << "first_property_names_len = " << first_property_names_len << endl;
+}
 
+void runtime_test() {
+    //core::rtti::Type type = core::rtti::Type<Entity>();
 
+    //Entity entity;
+    //auto entity_rti = get_type_info(entity);
+//auto 
+}
+
+int main() {
+    constexpr_test();
+    runtime_test();
 }
