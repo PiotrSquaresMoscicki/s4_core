@@ -1,5 +1,5 @@
-[~] Move tuple implementation used in ctti from core to ctti
-[ ] Add NameString
+[X] Move tuple implementation used in ctti from core to ctti
+[~] Add StringId
 [ ] Add rtti prototype
     [ ] Add Struct
     [ ] Add Enum
