@@ -3,7 +3,6 @@ set(S4_CORE_INCLUDE ${CMAKE_CURRENT_LIST_DIR})
 # gather source files list
 file(GLOB_RECURSE S4_CORE_SRCS RELATIVE ${CMAKE_CURRENT_LIST_DIR}
     ${S4_CORE_INCLUDE}/*.cpp 
-    ${S4_CORE_INCLUDE}/*.hpp 
     ${S4_CORE_INCLUDE}/*.hpp)
 GenerateSourceGoups("${S4_CORE_SRCS}")
 

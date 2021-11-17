@@ -37,11 +37,23 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${FULL_DIST_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FULL_DIST_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${FULL_DIST_DIR})
 
+# Fetch dependencies
+include(FetchContent)
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY "https://github.com/catchorg/Catch2.git"
+  GIT_TAG "v3.0.0-preview3"
+)
+
+FetchContent_MakeAvailable(Catch2)
+list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
+
 # Target names
 set(S4_CORE_TARGET s4_core)
-set(UNIT_TESTS_TARGET unit_tests)
-set(EXAMPLE_TARGET example)
+set(S4_CORE_TEST_TARGET s4_core_test)
+set(S4_CORE_EXAMPLE_TARGET s4_core_example)
 
 # Subdirectories
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(example)
