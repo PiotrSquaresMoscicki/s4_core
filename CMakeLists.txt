@@ -18,6 +18,7 @@ endfunction()
 # Start
 ##
 project(s4_core VERSION "1.0.0")
+enable_testing()
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -55,5 +56,5 @@ set(S4_CORE_EXAMPLE_TARGET s4_core_example)
 
 # Subdirectories
 add_subdirectory(src)
-add_subdirectory(test)
 add_subdirectory(example)
+add_subdirectory(test)
