@@ -11,6 +11,8 @@ namespace test {
     //*********************************************************************************************
     class ITestInterface {
     public:
+        virtual ~ITestInterface() = default;
+
         virtual StringId register_string(const std::string& src) = 0;
 
     }; // class ITestInterface

@@ -37,19 +37,21 @@ TEST_CASE( "Create from c string", "[StringId]" ) {
     REQUIRE( string_id.get() == string );
 }
 
+#include <filesystem>
+#include <iostream>
+using std::filesystem::current_path;
+
 //*************************************************************************************************
 TEST_CASE( "StringId created in dynamically loaded lib is registered properly", "[StringId]" ) {
-    if (auto res = Shared::open("./libs4_core_test_lib.so"); res.is_ok()) {
-        Shared lib = res.ok();
-        ITestInterface* test_obj 
-            = reinterpret_cast<ITestInterface*>(lib.symbol("create_test_interface").ok());
-        
-        const std::string src = "tests string";
-        const StringId id_from_exe = StringId(src);
-        const StringId id_from_lib = test_obj->register_string(src);
-        REQUIRE( id_from_exe == id_from_lib );
-    } else {
-        REQUIRE( false );
-    }
+    std::cout << current_path() << std::endl;
+
+    Shared lib = Shared::open("../../dist/libs4_core_test_lib.so").ok();
+    ITestInterface* test_obj 
+        = reinterpret_cast<ITestInterface*(*)()>(lib.symbol("create_test_interface").ok())();
+    
+    const std::string src = "tests string";
+    const StringId id_from_exe = StringId(src);
+    const StringId id_from_lib = test_obj->register_string(src);
+    REQUIRE( id_from_exe == id_from_lib );
 }
 
