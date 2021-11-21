@@ -37,14 +37,13 @@ TEST_CASE( "Create from c string", "[StringId]" ) {
     REQUIRE( string_id.get() == string );
 }
 
-#include <filesystem>
-#include <iostream>
-using std::filesystem::current_path;
+//*************************************************************************************************
+TEST_CASE( "Two StringIds created from the same string are equal", "[StringId]" ) {
+    REQUIRE( StringId("testssss") == StringId("testssss") );
+}
 
 //*************************************************************************************************
 TEST_CASE( "StringId created in dynamically loaded lib is registered properly", "[StringId]" ) {
-    std::cout << current_path() << std::endl;
-
     Shared lib = Shared::open("../../dist/libs4_core_test_lib.so").ok();
     ITestInterface* test_obj 
         = reinterpret_cast<ITestInterface*(*)()>(lib.symbol("create_test_interface").ok())();
