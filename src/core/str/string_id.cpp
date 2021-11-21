@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-using namespace core;
+using namespace core::str;
 
 namespace {
     std::unordered_map<std::string, std::shared_ptr<const std::string>> g_string_id_map;

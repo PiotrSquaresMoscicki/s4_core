@@ -52,6 +52,8 @@ list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 # Target names
 set(S4_CORE_TARGET s4_core)
 set(S4_CORE_TEST_TARGET s4_core_test)
+set(S4_CORE_TEST_INTERFACE_TARGET s4_core_test_interface)
+set(S4_CORE_TEST_LIB_TARGET s4_core_test_lib)
 set(S4_CORE_EXAMPLE_TARGET s4_core_example)
 
 # Subdirectories

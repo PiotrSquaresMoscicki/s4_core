@@ -1,6 +1,6 @@
 #pragma once
 
-#include <core/strings/constexpr_string.hpp>
+#include <core/str/constexpr_string.hpp>
 
 namespace core::attr {
 

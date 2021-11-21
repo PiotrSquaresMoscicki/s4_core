@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <core/strings/string_constant.hpp>
+#include <core/str/string_constant.hpp>
 
 // from https://github.com/Manu343726/ctti
 
