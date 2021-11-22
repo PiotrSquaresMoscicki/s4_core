@@ -9,8 +9,7 @@ namespace {
     std::unordered_map<std::string, std::shared_ptr<const std::string>> g_string_id_map;
     
     //*********************************************************************************************
-    std::shared_ptr<const std::string> register_string(const std::string& string)
-    {
+    std::shared_ptr<const std::string> register_string(const std::string& string) {
         std::shared_ptr<const std::string>& result = g_string_id_map[string];
         
         if (result == nullptr)
@@ -20,8 +19,7 @@ namespace {
     }
     
     //*********************************************************************************************
-    void unregister_string(std::shared_ptr<const std::string>&& string)
-    {
+    void unregister_string(std::shared_ptr<const std::string>&& string) {
         // function param and one in the map
         if (string.use_count() == 2)
             g_string_id_map.erase(*string);

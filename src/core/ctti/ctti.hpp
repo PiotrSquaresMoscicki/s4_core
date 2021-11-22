@@ -9,13 +9,13 @@
 
 namespace core::ctti {
 
-//------------------------------------------------------------------------------------------------
-template <typename T>
-constexpr auto get_type_info() { return T::template get_type_info<T>(); }
+	//*********************************************************************************************
+	template <typename T>
+	constexpr auto get_type_info() { return T::template get_type_info<T>(); }
 
 } // namespace core::ctti
 
-//------------------------------------------------------------------------------------------------
+//*************************************************************************************************
 #define DECLARE_STRUCT(STRUCT)\
 	friend constexpr auto ::core::ctti::get_type_info<::STRUCT>();\
 	template <typename CttiDeclarationTypename>\
@@ -26,13 +26,13 @@ constexpr auto get_type_info() { return T::template get_type_info<T>(); }
 			::core::attr::Name(#STRUCT),\
 			::core::attr::Sizeof(sizeof(STRUCT)),
 
-//------------------------------------------------------------------------------------------------
+//*************************************************************************************************
 #define END_STRUCT\
 			::core::attr::Struct()\
 		);\
 	}
 
-//------------------------------------------------------------------------------------------------
+//*************************************************************************************************
 #define DECLARE_FUNDAMENTAL(TYPE)\
 	template <>\
 	constexpr auto ::core::ctti::get_type_info<TYPE>()\

@@ -1,3 +1,5 @@
+# compile, build, test
+
 mkdir build
 cd build
 cmake ..
