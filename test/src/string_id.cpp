@@ -5,6 +5,8 @@
 
 #include <interface.hpp>
 
+#include <CmakeConfig.hpp>
+
 using namespace core::str;
 using namespace core::lib;
 using namespace core::util;
@@ -44,7 +46,7 @@ TEST_CASE( "Two StringIds created from the same string are equal", "[StringId]" 
 
 //*************************************************************************************************
 TEST_CASE( "StringId created in dynamically loaded lib is registered properly", "[StringId]" ) {
-    Shared lib = Shared::open("../../dist/libs4_core_test_lib.so").ok();
+    Shared lib = Shared::open(std::string(CMAKE_SOURCE_DIR) + "/dist/libs4_core_test_lib.so").ok();
     ITestInterface* test_obj 
         = reinterpret_cast<ITestInterface*(*)()>(lib.symbol("create_test_interface").ok())();
     
