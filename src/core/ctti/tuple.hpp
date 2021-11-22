@@ -150,7 +150,7 @@ namespace core::collections {
 		}
 
 		template <size_t... Indexes, typename T, typename... Args>
-		constexpr auto get_all_internal_2(std::index_sequence<Indexes...> dummy, T first, 
+		constexpr auto get_all_internal_2(std::index_sequence<Indexes...>, T first, 
 			Tuple<Args...> rest) const {
 			return ::core::collections::Tuple(first, rest.template at<Indexes>()...);
 		}

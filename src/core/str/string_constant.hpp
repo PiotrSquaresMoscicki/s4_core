@@ -106,7 +106,7 @@ public:
 		return index < N ? m_value[index] : throw std::out_of_range("Index out of range");
 	}
 
-	constexpr const char* const Get() const { return m_value; }
+	constexpr auto Get() const { return m_value; }
 	constexpr std::size_t Length() const { return N; }
 
 	std::string ToString() const { return std::string(m_value); }

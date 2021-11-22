@@ -44,24 +44,24 @@ namespace core::ctti {
         );\
 	}
 
-DECLARE_FUNDAMENTAL(bool);
+DECLARE_FUNDAMENTAL(bool)
 
-DECLARE_FUNDAMENTAL(short int);
-DECLARE_FUNDAMENTAL(unsigned short int);
-DECLARE_FUNDAMENTAL(int);
-DECLARE_FUNDAMENTAL(unsigned int);
-DECLARE_FUNDAMENTAL(long int);
-DECLARE_FUNDAMENTAL(unsigned long int);
-DECLARE_FUNDAMENTAL(long long int);
-DECLARE_FUNDAMENTAL(unsigned long long int);
+DECLARE_FUNDAMENTAL(short int)
+DECLARE_FUNDAMENTAL(unsigned short int)
+DECLARE_FUNDAMENTAL(int)
+DECLARE_FUNDAMENTAL(unsigned int)
+DECLARE_FUNDAMENTAL(long int)
+DECLARE_FUNDAMENTAL(unsigned long int)
+DECLARE_FUNDAMENTAL(long long int)
+DECLARE_FUNDAMENTAL(unsigned long long int)
 
-DECLARE_FUNDAMENTAL(signed char);
-DECLARE_FUNDAMENTAL(unsigned char);
-DECLARE_FUNDAMENTAL(char);
-DECLARE_FUNDAMENTAL(wchar_t);
-DECLARE_FUNDAMENTAL(char8_t);
-DECLARE_FUNDAMENTAL(char16_t);
-DECLARE_FUNDAMENTAL(char32_t);
+DECLARE_FUNDAMENTAL(signed char)
+DECLARE_FUNDAMENTAL(unsigned char)
+DECLARE_FUNDAMENTAL(char)
+DECLARE_FUNDAMENTAL(wchar_t)
+DECLARE_FUNDAMENTAL(char8_t)
+DECLARE_FUNDAMENTAL(char16_t)
+DECLARE_FUNDAMENTAL(char32_t)
 
 DECLARE_FUNDAMENTAL(float)
 DECLARE_FUNDAMENTAL(double)
@@ -97,12 +97,14 @@ DECLARE_FUNDAMENTAL(long double)
 // 	return ctti::get<Last>().get<attr::Name>().get();
 // }
 
-// #define CTTI_DECLARE_TEMPLATE_STRUCT(STRUCT, ...)\
-// 	friend constexpr auto ::ctti::get<::STRUCT<__VA_ARGS__>>();\
-// 	template <typename CttiDeclarationTypename>\
-// 	static constexpr auto getTypeInfo()\
-// 	{\
-// 		return ::ctti::AttrArrayFactory<CttiDeclarationTypename>::get\
-// 		(\
-// 			::attr::Name(#STRUCT),
+/*
+#define CTTI_DECLARE_TEMPLATE_STRUCT(STRUCT, ...)\
+	friend constexpr auto ::ctti::get<::STRUCT<__VA_ARGS__>>();\
+	template <typename CttiDeclarationTypename>\
+	static constexpr auto getTypeInfo()\
+	{\
+		return ::ctti::AttrArrayFactory<CttiDeclarationTypename>::get\
+		(\
+			::attr::Name(#STRUCT),
 
+*/

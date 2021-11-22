@@ -45,6 +45,11 @@ StringId::StringId(const std::string& src)
 {}
 
 //*************************************************************************************************
+StringId::~StringId() {
+    unregister_string(std::move(m_data));
+}
+
+//*************************************************************************************************
 bool StringId::operator== (const StringId& other) const {
     return m_data == other.m_data;
 }

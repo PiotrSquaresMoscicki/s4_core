@@ -12,6 +12,7 @@ namespace core::str {
         StringId();
         explicit StringId(const char* src);
         explicit StringId(const std::string& src);
+        ~StringId();
 
         bool operator== (const StringId& other) const;
         const std::string& get() const { return *m_data; }

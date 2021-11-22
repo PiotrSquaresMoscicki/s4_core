@@ -27,6 +27,12 @@ set(S4_CORE_ROOT_DIR ${CMAKE_SOURCE_DIR})
 set(DIST_DIR "${S4_CORE_ROOT_DIR}/dist")
 set(COMMON_BUILD_DIR "${S4_CORE_ROOT_DIR}/common_build")
 
+if(MSVC)
+add_compile_options(/W4 /WX)
+else()
+add_compile_options(-Wall -Wextra -Wpedantic -Werror -Wno-unused-variable)
+endif()
+
 # Output dirs
 if (WIN32)
 	set(FULL_DIST_DIR "${DIST_DIR}") # Config name is added autmatically on windows
