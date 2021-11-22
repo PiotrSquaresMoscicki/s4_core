@@ -15,6 +15,7 @@ namespace core::str {
         ~StringId();
 
         bool operator== (const StringId& other) const;
+        bool operator< (const StringId& other) const;
         const std::string& get() const { return *m_data; }
 
     private:
