@@ -105,7 +105,7 @@ namespace core::util {
 		constexpr Res(Res&&) = default;
 		constexpr Res& operator=(Res&) = default;
 		constexpr Res& operator=(Res&&) = default;
-		constexpr Res(Ok<void> ok) {}
+		constexpr Res(Ok<void> /*ok*/) {}
 		constexpr Res(Err<ERR> err) : m_value(std::move(err).get()) {}
 
 		constexpr bool is_ok() const { return !is_err(); }
