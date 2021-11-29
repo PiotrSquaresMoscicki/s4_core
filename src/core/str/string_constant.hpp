@@ -7,7 +7,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace core::strings {
+namespace core::str {
 
 // Recursive comparison of each individual character in a string
 // The last bit with std::enable_if uses SFINAE (Substitution Failure Is Not An Error)

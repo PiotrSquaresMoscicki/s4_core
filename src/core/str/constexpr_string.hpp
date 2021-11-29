@@ -5,7 +5,7 @@
 
 // from https://github.com/Manu343726/ctti
 
-namespace core::strings
+namespace core::str
 {
 	using hash_t = uint64_t;
 	constexpr hash_t fnv_basis = 14695981039346656037ull;

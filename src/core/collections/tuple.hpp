@@ -241,4 +241,4 @@ namespace core::collections {
 	template <typename First>
 	Tuple(First)->Tuple<First>;
 
-} // namespace core {
+} // namespace core::collections
