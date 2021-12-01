@@ -37,3 +37,4 @@
 # Cmake and build directories
 build
 dist
+.venv

@@ -46,7 +46,18 @@ TEST_CASE( "Two StringIds created from the same string are equal", "[StringId]" 
 
 //*************************************************************************************************
 TEST_CASE( "StringId created in dynamically loaded lib is registered properly", "[StringId]" ) {
-    Shared lib = Shared::open(std::string(CMAKE_SOURCE_DIR) + "/dist/libs4_core_test_lib.so").ok();
+    std::string shared_lib_path;
+    
+    #ifdef __APPLE__
+        shared_lib_path = "/dist/libs4_core_test_lib.dylib";
+    #elif __linux__
+        shared_lib_path = "/dist/libs4_core_test_lib.so";
+    #elif _WIN32
+        shared_lib_path = "/dist/libs4_core_test_lib.dll";
+    #endif 
+    
+    
+    Shared lib = Shared::open(std::string(CMAKE_SOURCE_DIR) + ).ok();
     ITestInterface* test_obj 
         = reinterpret_cast<ITestInterface*(*)()>(lib.symbol("create_test_interface").ok())();
     
