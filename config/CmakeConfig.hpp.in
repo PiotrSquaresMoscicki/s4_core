@@ -1,3 +1,5 @@
 #pragma once
 
 #define CMAKE_SOURCE_DIR "${CMAKE_SOURCE_DIR}"
+#define BUILD_CONFIG_NAME "${BUILD_CONFIG_NAME}"
+#define FULL_DIST_DIR "${FULL_DIST_DIR}"
