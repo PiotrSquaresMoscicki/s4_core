@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include <core/util/res.hpp>
@@ -21,15 +22,18 @@ namespace core::lib {
             UNDEFINED
         };
 
-        static Res<Shared, ErrOpen> open(std::string path);
+        Shared(Shared&& other);
+        ~Shared();
 
-        Res<void*, ErrSymbol> symbol(std::string symbol);
+        static Res<Shared, ErrOpen> open(const std::string& path);
+
+        Res<void*, ErrSymbol> symbol(const std::string& symbol);
 
     private:
-        Shared(void* handle) : m_handle(handle) {}
+        class Handle;
 
-        void* m_handle = nullptr;
-        //std::string 
+        Shared(std::unique_ptr<Handle> handle);
+        std::unique_ptr<Handle> m_handle;
 
     }; // class SharedLib
 
