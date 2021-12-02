@@ -38,9 +38,7 @@ if (WIN32)
 	set(FULL_DIST_DIR "${DIST_DIR}") # Config name is added autmatically on windows
 else()
 	set(FULL_DIST_DIR "${DIST_DIR}/${CONFIGURATION}")
-	message(dupaaaa)
 endif()
-message(${FULL_DIST_DIR})
 	
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${FULL_DIST_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FULL_DIST_DIR})
