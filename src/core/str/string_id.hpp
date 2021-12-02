@@ -22,8 +22,13 @@ namespace core::str {
         const std::string& get() const { return *m_data; }
 
     private:
+#ifdef _WIN32
+    #pragma warning( push, 4251 ) // will be fixed after custom SharedPtr will be implemented
+#endif
         std::shared_ptr<const std::string> m_data = nullptr;
-
+#ifdef _WIN32
+    #pragma warning( pop )
+#endif
     }; // class StringId
 
 } // namespace core::strings
