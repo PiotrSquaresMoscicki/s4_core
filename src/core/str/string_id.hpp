@@ -23,7 +23,7 @@ namespace core::str {
 
     private:
 #ifdef _WIN32
-    #pragma warning( push, 4251 ) // will be fixed after custom SharedPtr will be implemented
+    #pragma warning( push, C4251 ) // will be fixed after custom SharedPtr will be implemented
 #endif
         std::shared_ptr<const std::string> m_data = nullptr;
 #ifdef _WIN32
