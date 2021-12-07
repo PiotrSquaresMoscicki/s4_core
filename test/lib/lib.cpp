@@ -1,7 +1,13 @@
-#include "lib.hpp"
+#include <interface.hpp>
 
 using namespace core::str;
 using namespace test;
+
+#ifdef _WIN64
+    #define S4_TEST_LIB_EXPORT __declspec(dllexport)
+#else
+    #define S4_TEST_LIB_EXPORT
+#endif
 
 //*************************************************************************************************
 //*************************************************************************************************
@@ -17,6 +23,6 @@ StringId TestInterfaceImpl::register_string(const std::string& src) {
     return StringId(src);
 }
 
-extern "C" test::ITestInterface* create_test_interface() {
+extern "C" S4_TEST_LIB_EXPORT test::ITestInterface* create_test_interface() {
     return new TestInterfaceImpl{};
 }

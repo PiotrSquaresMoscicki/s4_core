@@ -53,9 +53,8 @@ TEST_CASE( "StringId created in dynamically loaded lib is registered properly", 
     #elif __linux__
         shared_lib_path = "libs4_core_test_lib.so";
     #elif _WIN32
-        shared_lib_path = "libs4_core_test_lib.dll";
+        shared_lib_path = "Debug/s4_core_test_lib.dll";
     #endif 
-    
     
     Shared lib = Shared::open(std::string(FULL_DIST_DIR) + "/" + shared_lib_path).ok();
     ITestInterface* test_obj 
